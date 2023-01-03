@@ -1,5 +1,5 @@
 import express from "express";
-import { Router, Request, Response } from "express";
+import { Router} from "express";
 import { MQController } from "./controller/mq.controller";
 
 const app = express();
@@ -9,9 +9,10 @@ app.use(express.json());
 
 var mqController = new MQController();
 
-route.get("/",  mqController.mqHelloWorld);
-route.post("/", mqController.mqReceiveUser);
-route.get("/all", mqController.mqListAllUsers);
+route.get("/",  mqController.helloWorld);
+route.post("/", mqController.receiveUser);
+route.get("/all", mqController.listAllUsers);
+route.get("/send", mqController.sendMessageAllUsers);
 
 app.use(route);
 

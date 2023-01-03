@@ -5,6 +5,10 @@ export class UserRepositoryMemory implements IUserRepository {
 
     private users: User[] = [];
 
+    constructor() {
+        this.users.push(new User("João da Silva", 20, "184.152.562-56"));
+    }
+
     findAll(): Promise<User[]> {
         return new Promise<User[]>((resolve) => {
             resolve(this.users);
