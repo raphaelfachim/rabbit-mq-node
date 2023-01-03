@@ -10,7 +10,8 @@ app.use(express.json());
 var mqController = new MQController();
 
 route.get("/",  mqController.mqHelloWorld);
-route.post("/", mqController.mqReceiveUser)
+route.post("/", mqController.mqReceiveUser);
+route.get("/all", mqController.mqListAllUsers);
 
 app.use(route);
 
