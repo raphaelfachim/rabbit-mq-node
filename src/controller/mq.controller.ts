@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import { inject } from "inversify/lib/annotation/inject";
-// import { mqApp } from "../mqapp";
 import { User } from "../domain/user";
-import { HTTP_INTERNAL_ERROR, HTTP_OK } from "../infra/http";
+import { HttpResponse, HTTP_INTERNAL_ERROR, HTTP_OK } from "../infra/http";
 import { TYPES } from "../infra/inversify";
 import MQService from "../infra/mq/interfaces/mqservice";
 import { UserTemplate } from "../infra/mq/templates";
@@ -22,26 +21,46 @@ export class MQController {
         this.mqService = mqservice;
     }
 
-    helloWorld = (req: Request, res: Response) => {
-        res.send( { message : "Hello World from MQ controller"} )
+    helloWorld = async () => {
+        return {
+            body: { message : "Hello World from adapter!" },
+            statusCode: HTTP_OK
+        }
     }
 
-    receiveUser = (req: Request, res: Response) => {
-        var user: User = req.body;
-        console.log(user);
-        this.userRepository.create(user);
-        res.sendStatus(HTTP_OK);
+    createUser = async (user: User) => {
+        try {
+            var newUser = await this.userRepository.create(user);
+            return {
+                statusCode: HTTP_OK,
+                body: newUser
+            }
+        } catch (ex) {
+            return {
+                statusCode: HTTP_INTERNAL_ERROR,
+                body: { error_message : ex.message}
+            }
+        }
     }
 
-    listAllUsers = (req: Request, res: Response) => {
-        this.userRepository.findAll().then((users) => {
-            res.send(JSON.stringify(users));
-        }).catch((err) => {
-            res.sendStatus(HTTP_INTERNAL_ERROR);
-        })
+    listAllUsers = async () => {
+        try {
+            var users: User[] = 
+                await this.userRepository.findAll();
+            
+            return {
+                statusCode: HTTP_OK,
+                body: users
+            }
+        } catch (ex) {
+            return {
+                statusCode: HTTP_INTERNAL_ERROR,
+                body: users
+            }
+        }
     }
 
-    sendMessageAllUsers = async (req: Request, res: Response) => {
+    sendMessageAllUsers = async () => {
         var users: User[];
         try {
             users = await this.userRepository.findAll();
@@ -50,14 +69,26 @@ export class MQController {
                 // formata o usuario de acordo com o template
                 const message = MQConcat.execute(user, new UserTemplate());
                 // envia a string dos dados via mensagem
-                console.log("Enviando mensagem com usuário");
                 this.mqService.sendMessage(rabbitMQChannel, "hello", message);
             }
-
-            res.sendStatus(HTTP_OK);
+            return {
+                statusCode: HTTP_OK,
+                body: { status :  `${users.length} usuário(s) enviado(s)`}
+            }
         } catch (ex) {
-            res.sendStatus(HTTP_INTERNAL_ERROR);
+            return {
+                statusCode: HTTP_INTERNAL_ERROR,
+                body: { error_message : ex.message }
+            }
         }
-
     }
+
+    receiveParameters = async (params: any) => {
+        console.log("params : ", params);
+        return {
+            statusCode: HTTP_OK,
+            body: { }
+        }
+    }
+
 }

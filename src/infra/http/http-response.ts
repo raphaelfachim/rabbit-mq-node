@@ -1,3 +1,4 @@
-import { Request, Response } from "express";
-
-export type HttpResponse = (res: Response, req: Request) => any;
+export type HttpResponse = {
+    statusCode: number;
+    body: any;
+}
