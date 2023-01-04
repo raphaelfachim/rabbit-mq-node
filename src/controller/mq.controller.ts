@@ -2,18 +2,21 @@ import { Request, Response } from "express";
 // import { mqApp } from "../mqapp";
 import { User } from "../domain/user";
 import { HTTP_INTERNAL_ERROR, HTTP_OK } from "../infra/http";
+import MQService from "../infra/mq/interfaces/mqservice";
 import { UserTemplate } from "../infra/mq/templates";
 import { MQConcat } from "../infra/mq/tools";
 import { UserRepositoryMemory } from "../infra/repositories/implementations/mem/user.respository";
 import { IUserRepository } from "../infra/repositories/interfaces";
-import { MQConfig, RabbitMQAdapter } from "../mqapp";
+import { mqservice, rabbitMQChannel } from "../messaging";
 
 export class MQController {
 
     private readonly userRepository: IUserRepository;
+    private readonly mqService: MQService;
 
     constructor() { 
-        this.userRepository = new UserRepositoryMemory();    
+        this.userRepository = new UserRepositoryMemory();
+        this.mqService = mqservice;
     }
 
     helloWorld = (req: Request, res: Response) => {
@@ -44,10 +47,8 @@ export class MQController {
                 // formata o usuario de acordo com o template
                 const message = MQConcat.execute(user, new UserTemplate());
                 // envia a string dos dados via mensagem
-                var mqApp = new RabbitMQAdapter();
-                await mqApp.createConnection(MQConfig.url);
-                await mqApp.sendMessage("hello", message)
-                
+                console.log("Enviando mensagem com usuário");
+                this.mqService.sendMessage(rabbitMQChannel, "hello", message);
             }
 
             res.sendStatus(HTTP_OK);

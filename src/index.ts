@@ -1,1 +1,1 @@
-export * from "./mqapp"
+export * from "./messaging"
