@@ -1,6 +1,6 @@
 import express from "express";
 import { Router} from "express";
-import { MQController } from "./controller/mq.controller";
+import { UserController } from "./controller/user.controller";
 import { expressAdapter } from "./infra/http";
 import { inversifyContainer, TYPES } from "./infra/inversify";
 import { IUserRepository } from "./infra/repositories/interfaces";
@@ -10,14 +10,14 @@ const route = Router();
 
 app.use(express.json());
 
-var mqController = new MQController(inversifyContainer.get<IUserRepository>(TYPES.IUserRepository));
+var userController = new UserController();
 
-route.get("/",  expressAdapter(mqController.helloWorld));
-route.get("/all", expressAdapter(mqController.listAllUsers));
-route.get("/send", expressAdapter(mqController.sendMessageAllUsers));
+route.get("/",  expressAdapter(userController.helloWorld));
+route.get("/all", expressAdapter(userController.findAllUsers));
+route.get("/send", expressAdapter(userController.sendMessageAllUsers));
 
-route.post("/", expressAdapter(mqController.createUser));
-route.post("/:id/params", expressAdapter(mqController.receiveParameters));
+route.post("/", expressAdapter(userController.createUser));
+route.post("/:id/params", expressAdapter(userController.receiveParameters));
 
 app.use(route);
 
