@@ -1,9 +1,8 @@
-import { Request, Response } from "express";
 import { inject } from "inversify/lib/annotation/inject";
 import { User } from "../domain/user";
 import { HttpResponse, HTTP_INTERNAL_ERROR, HTTP_OK } from "../infra/http";
 import { TYPES } from "../infra/inversify";
-import MQService from "../infra/mq/interfaces/mqservice";
+import { MQService } from "../infra/mq/interfaces";
 import { UserTemplate } from "../infra/mq/templates";
 import { MQConcat } from "../infra/mq/tools";
 import { IUserRepository } from "../infra/repositories/interfaces";
@@ -21,14 +20,14 @@ export class MQController {
         this.mqService = mqservice;
     }
 
-    helloWorld = async () => {
+    helloWorld = async (): Promise<HttpResponse> => {
         return {
             body: { message : "Hello World from adapter!" },
             statusCode: HTTP_OK
         }
     }
 
-    createUser = async (user: User) => {
+    createUser = async (user: User): Promise<HttpResponse> => {
         try {
             var newUser = await this.userRepository.create(user);
             return {
@@ -43,7 +42,7 @@ export class MQController {
         }
     }
 
-    listAllUsers = async () => {
+    listAllUsers = async (): Promise<HttpResponse> => {
         try {
             var users: User[] = 
                 await this.userRepository.findAll();
@@ -60,7 +59,7 @@ export class MQController {
         }
     }
 
-    sendMessageAllUsers = async () => {
+    sendMessageAllUsers = async (): Promise<HttpResponse> => {
         var users: User[];
         try {
             users = await this.userRepository.findAll();
@@ -83,7 +82,7 @@ export class MQController {
         }
     }
 
-    receiveParameters = async (params: any) => {
+    receiveParameters = async (params: any): Promise<HttpResponse> => {
         console.log("params : ", params);
         return {
             statusCode: HTTP_OK,

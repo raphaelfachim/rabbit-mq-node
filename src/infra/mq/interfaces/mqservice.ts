@@ -1,6 +1,6 @@
 import { Channel, Connection } from "amqplib";
 
-export default interface MQService {
+export interface MQService {
 
     createConnection(uri: string): Promise<Connection>;
     createChannel(connection: Connection): Promise<Channel>;
