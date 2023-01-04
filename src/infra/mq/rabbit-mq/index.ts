@@ -1,1 +1,1 @@
-export * from "./mqapp"
+export * from "./rabbit-mq-adapter"

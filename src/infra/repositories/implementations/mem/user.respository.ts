@@ -1,6 +1,8 @@
+import { injectable } from "inversify";
 import { User } from "../../../../domain";
 import { IUserRepository } from "../../interfaces";
 
+@injectable()
 export class UserRepositoryMemory implements IUserRepository {
 
     private users: User[] = [];

@@ -2,11 +2,6 @@ import amqp, { Connection, Channel } from 'amqplib';
 import { MQConfig } from '../interfaces';
 import MQService from '../interfaces/mqservice';
 
-// export const MQConfig = {
-//     url : "amqp://localhost",
-//     queue : "hello"
-// }
-
 export class RabbitMQAdapter implements MQService{
 
     constructor(public mqConfig?: MQConfig) { }
