@@ -1,6 +1,6 @@
-import { User } from "../../../domain";
+import { UserHttpInputTO } from "../../../domain/to/user";
 import { HttpResponse } from "../../../infra/http";
 
 export interface ICreateUserUseCase {
-    execute(user: User): Promise<HttpResponse>;
+    execute(dto: UserHttpInputTO): Promise<HttpResponse>;
 }

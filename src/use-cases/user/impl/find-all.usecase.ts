@@ -1,4 +1,6 @@
 import { inject } from "inversify";
+import { parse } from "../../../domain/parser/user/http-out.parser";
+import { UserHttpOutputTO } from "../../../domain/to/user";
 import { HttpErrorResponse, HttpResponse, HttpSuccessResponse } from "../../../infra/http";
 import { TYPES } from "../../../infra/inversify";
 import { IUserRepository } from "../../../infra/repositories/interfaces";
@@ -14,9 +16,12 @@ export class FindAllUsersUseCase implements IFindAllUsersUseCase {
 
     async execute(): Promise<HttpResponse> {
         try {
-            return new HttpSuccessResponse(
-                await this._userRepository.findAll()
-            );
+            const users = await this._userRepository.findAll()
+            var dtos: UserHttpOutputTO[] = [];
+            for(let user of users){
+                dtos.push(parse(user))
+            }
+            return new HttpSuccessResponse(dtos);
         } catch(ex) {
             return new HttpErrorResponse(ex.message);
         }

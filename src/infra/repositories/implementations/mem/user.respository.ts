@@ -9,6 +9,7 @@ export class UserRepositoryMemory implements IUserRepository {
 
     constructor() {
         this.users.push(new User("João da Silva", 20, "184.152.562-56"));
+        this.users.push(new User("Raphael Siller Fachim", 25, "169.912.047-14"));
     }
 
     findAll(): Promise<User[]> {

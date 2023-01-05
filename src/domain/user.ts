@@ -1,7 +1,7 @@
 export class User {
-    public readonly name: String;
-    public readonly age: number;
-    public readonly registration: String;
+    public name: string;
+    public age: number;
+    public registration: string;
     
     constructor (name?: string, age?: number, registration?: string) {
         if(name) this.name = name;
