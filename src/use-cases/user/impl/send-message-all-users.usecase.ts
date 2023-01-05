@@ -1,8 +1,6 @@
 import { inject } from "inversify";
 import { User } from "../../../domain";
-import { HttpResponse } from "../../../infra/http";
-import { HttpErrorResponse } from "../../../infra/http/http-error-response";
-import { HttpSuccessResponse } from "../../../infra/http/http-success-response";
+import { HttpResponse, HttpErrorResponse, HttpSuccessResponse } from "../../../infra/http";
 import { TYPES } from "../../../infra/inversify";
 import { MQService } from "../../../infra/mq/interfaces";
 import { UserTemplate } from "../../../infra/mq/templates";
