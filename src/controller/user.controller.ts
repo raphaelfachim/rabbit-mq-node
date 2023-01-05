@@ -1,4 +1,4 @@
-import { User } from "../domain/user";
+import { User } from "../domain/user.entity";
 import { HttpResponse, HTTP_OK } from "../infra/http";
 import { inversifyContainer, TYPES } from "../infra/inversify";
 import { IUserRepository } from "../infra/repositories/interfaces";

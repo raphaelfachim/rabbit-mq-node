@@ -16,11 +16,12 @@ export const expressAdapter = (handle: (data?: any) => Promise<HttpResponse>) =>
 
         response = await handle(content);
         
-        if(response.statusCode >= 200 && response.statusCode < 299){
-            res.status(response.statusCode).json(response.body);
-        } else {
-            res.sendStatus(response.statusCode);
-        }
+        // if(response.statusCode >= 200 && response.statusCode < 299){
+        //     res.status(response.statusCode).json(response.body);
+        // } else {
+            //     res.status(response.statusCode).json(response.body);
+            // }
+        res.status(response.statusCode).json(response.body);
 
     }
 }

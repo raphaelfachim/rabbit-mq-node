@@ -1,5 +1,5 @@
 import { CHANNEL_CREATED, CHANNEL_FAILED, CONNECTED, CONNECTION_FAILED, MQConfig } from "./infra/mq/interfaces";
-import MQService from "./infra/mq/interfaces/mqservice";
+import { MQService } from "./infra/mq/interfaces/mqservice";
 import { RabbitMQAdapter } from "./infra/mq/rabbit-mq";
 
 export const mqservice: MQService = new RabbitMQAdapter();
