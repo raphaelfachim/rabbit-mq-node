@@ -5,6 +5,6 @@ export const parse = (userHttpInput: UserHttpInputTO): User => {
     return new User(
         userHttpInput.nome,
         Number(userHttpInput.idade),
-        userHttpInput.documento
+        userHttpInput.email
     );
 }

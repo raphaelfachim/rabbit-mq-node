@@ -1,10 +1,10 @@
-import { JoinColumn, OneToOne } from "typeorm";
+import { JoinColumn, OneToOne, Table } from "typeorm";
 import { Column } from "typeorm/decorator/columns/Column";
 import { PrimaryGeneratedColumn } from "typeorm/decorator/columns/PrimaryGeneratedColumn";
 import { Entity } from "typeorm/decorator/entity/Entity";
 import { Character } from "./character.entity";
 
-@Entity()
+@Entity("users")
 export class User {
     @PrimaryGeneratedColumn()
     id: number;
@@ -19,10 +19,15 @@ export class User {
     public registration: string;
 
     @OneToOne(() => Character, (character) => character.user)
-    @JoinColumn()
+    @JoinColumn({
+        name: "characters_id"
+    })
     public character: Character;
 
-    @Column('timestamp')
+    @Column({
+        name: "created_at",
+        type: "timestamp"
+    })
     public createdAt: Date;
 
     constructor (name?: string, age?: number, registration?: string) {

@@ -14,6 +14,8 @@ export class CreateCharactersTable1673012269580 implements MigrationInterface {
                         name: "id",
                         type: "int",
                         isPrimary: true,
+                        isGenerated: true,
+                        generationStrategy: "increment"
                     },
                     {
                         name: "name",

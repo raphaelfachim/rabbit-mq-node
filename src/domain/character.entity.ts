@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "ty
 import { User } from "./user.entity";
 
 
-@Entity()
+@Entity("characters")
 export class Character {
 
     @PrimaryGeneratedColumn()
@@ -12,6 +12,9 @@ export class Character {
     name: string;
 
     @OneToOne(() => User, (user) => user.character)
+    @JoinColumn({
+        name: "users_id"
+    })
     user: User
 
     constructor( ) { }

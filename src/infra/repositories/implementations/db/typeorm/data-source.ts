@@ -9,7 +9,8 @@ export const AppDataSource = new DataSource({
     database: "squid",
     synchronize: false,
     logging: false,
-    entities: ["dist/domain/*.entity.js"],
+    entities: ["src/domain/*.entity.ts"], // mudar aqui para 'dist/domain/*.entity.js' quando for rodar uma migration
+    // entities: ["dist/domain/*.entity.js"],
     subscribers: [],
     migrations: ["dist/infra/repositories/implementations/db/typeorm/migrations/*.js"],
 })
