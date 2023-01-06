@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import { Character } from "../../../../domain/character.entity";
 import { ICharacterRepository } from "../../interfaces";
-import { AppDataSource } from "./datasource";
+import { AppDataSource } from "./typeorm";
 
 @injectable()
 export class CharacterRepository implements ICharacterRepository {

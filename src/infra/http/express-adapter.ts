@@ -1,4 +1,4 @@
-import { request, Request, Response } from "express";
+import { Request, Response } from "express";
 import { HttpResponse } from "./http-response";
 
 export const expressAdapter = (handle: (data?: any) => Promise<HttpResponse>) => {

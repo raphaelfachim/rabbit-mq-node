@@ -2,23 +2,27 @@ import { Column } from "typeorm/decorator/columns/Column";
 import { PrimaryGeneratedColumn } from "typeorm/decorator/columns/PrimaryGeneratedColumn";
 import { Entity } from "typeorm/decorator/entity/Entity";
 
-// @Entity()
+@Entity()
 export class User {
-    // @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn()
     id: number;
 
-    // @Column()
+    @Column()
     public name: string;
 
-    // @Column()
+    @Column()
     public age: number;
 
-    // @Column()
+    @Column()
     public registration: string;
+
+    @Column('timestamp')
+    createdAt: Date;
 
     constructor (name?: string, age?: number, registration?: string) {
         if(name) this.name = name;
         if(age) this.age = age;
         if(registration) this.registration = registration;
+        this.createdAt = new Date();
     }
 }

@@ -4,7 +4,7 @@ import { CharacterController } from "./controller";
 import { UserController } from "./controller/user.controller";
 import { expressAdapter } from "./infra/http";
 
-import { AppDataSource } from "./infra/repositories/implementations/db/datasource";
+import { AppDataSource } from "./infra/repositories/implementations/db/typeorm";
 
 const ds = AppDataSource;
 
@@ -25,13 +25,26 @@ app.use(express.json());
 var userController = new UserController();
 var characterController = new CharacterController();
 
+// ========== misc ==========
+// GET
 route.get("/",  expressAdapter(userController.helloWorld));
-route.get("/all", expressAdapter(userController.findAllUsers));
-route.get("/send", expressAdapter(userController.sendMessageAllUsers));
 
-route.post("/", expressAdapter(userController.createUser));
-route.post("/char/new", expressAdapter(characterController.createCharacter));
+// POST
 route.post("/:id/params", expressAdapter(userController.receiveParameters));
+
+// ========== users ==========
+// GET
+route.get("/users/all", expressAdapter(userController.findAllUsers));
+route.get("/users/send", expressAdapter(userController.sendMessageAllUsers));
+
+// POST
+route.post("/users/new", expressAdapter(userController.createUser));
+
+// ========== characters ==========
+// GET
+
+// POST
+route.post("/char/new", expressAdapter(characterController.createCharacter));
 
 app.use(route);
 

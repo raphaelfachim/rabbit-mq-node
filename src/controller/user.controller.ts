@@ -1,3 +1,4 @@
+import { UserHttpInputTO } from "../domain/to/user";
 import { User } from "../domain/user.entity";
 import { HttpResponse, HTTP_OK } from "../infra/http";
 import { inversifyContainer, TYPES } from "../infra/inversify";
@@ -14,8 +15,8 @@ export class UserController {
         }
     }
 
-    createUser = async (user: User): Promise<HttpResponse> => {
-        return new CreateUserUseCase(inversifyContainer.get<IUserRepository>(TYPES.IUserRepository)).execute(user);
+    createUser = async (dto: UserHttpInputTO): Promise<HttpResponse> => {
+        return new CreateUserUseCase(inversifyContainer.get<IUserRepository>(TYPES.IUserRepository)).execute(dto);
     }
 
     findAllUsers = async (): Promise<HttpResponse> => {
