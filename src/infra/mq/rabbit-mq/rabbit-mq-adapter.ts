@@ -1,6 +1,5 @@
 import amqp, { Connection, Channel } from 'amqplib';
-import { MQConfig } from '../interfaces';
-import MQService from '../interfaces/mqservice';
+import { MQConfig, MQService } from '../interfaces';
 
 export class RabbitMQAdapter implements MQService{
 

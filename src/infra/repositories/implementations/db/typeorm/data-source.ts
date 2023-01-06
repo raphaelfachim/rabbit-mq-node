@@ -1,5 +1,4 @@
 import { DataSource } from "typeorm";
-import { Character, User } from "../../../../../domain";
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -10,7 +9,7 @@ export const AppDataSource = new DataSource({
     database: "squid",
     synchronize: false,
     logging: false,
-    entities: [ Character, User],
+    entities: ["dist/domain/*.entity.js"],
     subscribers: [],
-    migrations: []
+    migrations: ["dist/infra/repositories/implementations/db/typeorm/migrations/*.js"],
 })
