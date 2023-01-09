@@ -10,22 +10,22 @@ const mqConfig: MQConfig = {
     queue : "hello"
 }
 
-mqservice.createConnection(mqConfig.url)
-    .then((conn) => {
-        console.log(CONNECTED);
+// mqservice.createConnection(mqConfig.url)
+//     .then((conn) => {
+//         console.log(CONNECTED);
         
-        mqservice.createChannel(conn)
-            .then((channel) => {
-                rabbitMQChannel = channel;
-                console.log(CHANNEL_CREATED);
-            })
-            .catch((err) => {
-                console.error(CHANNEL_FAILED, err);
-            })
-    })
-    .catch((err) => {
-        console.error(CONNECTION_FAILED, err);
-    });
+//         mqservice.createChannel(conn)
+//             .then((channel) => {
+//                 rabbitMQChannel = channel;
+//                 console.log(CHANNEL_CREATED);
+//             })
+//             .catch((err) => {
+//                 console.error(CHANNEL_FAILED, err);
+//             })
+//     })
+//     .catch((err) => {
+//         console.error(CONNECTION_FAILED, err);
+//     });
 
 
 

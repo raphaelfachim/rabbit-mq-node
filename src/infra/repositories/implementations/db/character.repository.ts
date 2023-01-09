@@ -10,7 +10,12 @@ export class CharacterRepository implements ICharacterRepository {
     save(character: Character): Promise<Character> {
         return this._datasource.getRepository(Character).save(character);
     }
+    
     findAll(): Promise<Character[]> {
-        return this._datasource.getRepository(Character).find();
+        return this._datasource.getRepository(Character).find({
+            relations: {
+                user: true
+            }
+        });
     }
 }

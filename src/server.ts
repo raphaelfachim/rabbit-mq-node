@@ -42,9 +42,11 @@ route.post("/users/new", expressAdapter(userController.createUser));
 
 // ========== characters ==========
 // GET
+route.get("/:id_usuario/char", expressAdapter(characterController.findCharacterByUser));
+route.get("/char/all", expressAdapter(characterController.findAll));
 
 // POST
-route.post("/char/new", expressAdapter(characterController.createCharacter));
+route.post("/:id_usuario/char/new", expressAdapter(characterController.createCharacter));
 
 app.use(route);
 
