@@ -11,7 +11,7 @@ export class Character {
     @Column()
     name: string;
 
-    @OneToOne(() => User, (user) => user.character)
+    @OneToOne(() => User, (user) => user.character, {onDelete: "SET NULL"})
     @JoinColumn({
         name: "users_id"
     })

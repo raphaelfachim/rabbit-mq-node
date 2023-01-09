@@ -2,7 +2,7 @@ import { CharacterHttpInputTO } from "../domain/to/character";
 import { HttpResponse } from "../infra/http";
 import { inversifyContainer, TYPES } from "../infra/inversify";
 import { ICharacterRepository, IUserRepository } from "../infra/repositories/interfaces";
-import { CreateCharacterUseCase, FindAllCharactersUseCase, FindCharacterByUserUseCase } from "../use-cases/character";
+import { CreateCharacterUseCase, DeleteCharacterUseCase, FindAllCharactersUseCase, FindCharacterByUserUseCase } from "../use-cases/character";
 
 export class CharacterController {
 
@@ -24,5 +24,9 @@ export class CharacterController {
     
         findCharacterByUser(id_usuario: number): Promise<HttpResponse> {
             return new FindCharacterByUserUseCase(inversifyContainer.get<IUserRepository>(TYPES.IUserRepository)).execute(id_usuario);
+        }
+
+        delete(dto: any): Promise<HttpResponse> {
+            return new DeleteCharacterUseCase(inversifyContainer.get<IUserRepository>(TYPES.IUserRepository)).execute(dto);
         }
     }

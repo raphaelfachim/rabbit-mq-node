@@ -48,6 +48,9 @@ route.get("/char/all", expressAdapter(characterController.findAll));
 // POST
 route.post("/:id_usuario/char/new", expressAdapter(characterController.createCharacter));
 
+// DELETE
+route.delete("/:id_usuario/char/delete", expressAdapter(characterController.delete));
+
 app.use(route);
 
 app.listen(3333, () => "Server listening port 3333");

@@ -2,6 +2,7 @@ import { inject } from "inversify";
 import { parse as parseHttpInput } from "../../../domain/parser/character/http-in.parser";
 import { parse as parseHttpOutput } from "../../../domain/parser/character/http-out.parser";
 import { CharacterHttpInputTO } from "../../../domain/to/character";
+import { CHAR_MES01 } from "../../../infra/error-messages/usecases";
 import { HttpErrorResponse, HttpResponse, HttpSuccessResponse } from "../../../infra/http";
 import { TYPES } from "../../../infra/inversify";
 import { ICharacterRepository, IUserRepository } from "../../../infra/repositories/interfaces";
@@ -24,6 +25,8 @@ export class CreateCharacterUseCase implements ICreateCharacterUseCase {
     async execute(dto: CharacterHttpInputTO): Promise<HttpResponse> {
         try {
             const user = await this._userRepository.findById(dto.id_usuario);
+            if(user.character) throw Error(CHAR_MES01);
+
             user.character = await this._characterRepository.save(parseHttpInput(dto));
             await this._userRepository.save(user);
 
