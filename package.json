@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "send": "tsc && node ./dist/index.js",
     "server": "ts-node-dev --respawn --transpile-only ./src/server.ts",
-    "migrations:create": "typeorm migration:create src/infra/repositories/implementations/db/typeorm/migrations/CreateFKsUsersCharacters",
+    "migrations:create": "typeorm migration:create src/infra/repositories/implementations/db/typeorm/migrations/CreateSquiddoTypesTable",
     "migrations:run": "tsc && typeorm migration:run -d dist/infra/repositories/implementations/db/typeorm/data-source.js"
   },
   "keywords": [

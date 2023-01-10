@@ -1,2 +1,5 @@
 export * from "./character.entity"
+export * from "./localization.entity"
+export * from "./squiddo.entity"
+export * from "./squiddo-type.entity"
 export * from "./user.entity"
