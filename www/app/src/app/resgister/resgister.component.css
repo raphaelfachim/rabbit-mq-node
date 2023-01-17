@@ -1,0 +1,12 @@
+.register-box {
+    display: block;
+    align-items: center;
+    border: solid;
+    border-radius: 5px;
+    border-color: black;
+    width: 70%;
+}
+
+.form-control {
+    margin: 15px 0px;
+}

@@ -1,0 +1,7 @@
+<div class="register-box">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+        <input type="text" class="form-control" id="name" required [(ngModel)] = "name" name="name">
+        <input type="text" class="form-control" id="email" required [(ngModel)] = "email" name="email">
+        <button type="submit" class="btn btn-primary mb-3">Register</button>
+    </form>
+</div> 

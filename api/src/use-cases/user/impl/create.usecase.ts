@@ -17,6 +17,8 @@ export class CreateUserUseCase implements ICreateUserUseCase{
 
     async execute(dto: UserHttpInputTO): Promise<HttpResponse> {
         try {
+            console.log("parsed", parse(dto));
+            
             return new HttpSuccessResponse(parseOutput(await this._userRepository.create(parse(dto))));  
         } catch(ex) {
             return new HttpErrorResponse(ex.message);

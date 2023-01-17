@@ -3,6 +3,7 @@ import { Router} from "express";
 import { CharacterController } from "./controller";
 import { UserController } from "./controller/user.controller";
 import { expressAdapter } from "./infra/http";
+import cors from 'cors'
 
 import { AppDataSource } from "./infra/repositories/implementations/db/typeorm";
 
@@ -21,6 +22,7 @@ const app = express();
 const route = Router();
 
 app.use(express.json());
+app.use(cors());
 
 var userController = new UserController();
 var characterController = new CharacterController();

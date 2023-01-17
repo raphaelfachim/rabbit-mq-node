@@ -16,6 +16,8 @@ export class UserController {
     }
 
     createUser = async (dto: UserHttpInputTO): Promise<HttpResponse> => {
+        console.log("dto", dto);
+        
         return new CreateUserUseCase(inversifyContainer.get<IUserRepository>(TYPES.IUserRepository)).execute(dto);
     }
 
