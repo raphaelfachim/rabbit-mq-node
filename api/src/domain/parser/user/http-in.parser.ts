@@ -4,7 +4,8 @@ import { User } from "../../user.entity";
 export const parse = (userHttpInput: UserHttpInputTO): User => {
     return new User(
         userHttpInput.nome,
-        Number(userHttpInput.idade),
-        userHttpInput.email
+        userHttpInput.senha,
+        userHttpInput.email,
+        new Date(userHttpInput.data_nascimento),
     );
 }

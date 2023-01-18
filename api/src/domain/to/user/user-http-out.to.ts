@@ -1,5 +1,5 @@
 export class UserHttpOutputTO {
     name: string;
-    age: string;
+    age: number;
     created: string;
 }

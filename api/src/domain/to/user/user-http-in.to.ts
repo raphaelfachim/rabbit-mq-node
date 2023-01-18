@@ -1,5 +1,6 @@
 export class UserHttpInputTO {
     nome: string;
-    idade: string;
     email: string;
+    senha: string;
+    data_nascimento: string;
 }

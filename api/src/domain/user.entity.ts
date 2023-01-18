@@ -13,10 +13,13 @@ export class User {
     public name: string;
 
     @Column()
-    public age: number;
+    private password: string;
 
     @Column()
-    public registration: string;
+    public birthDate: Date;
+
+    @Column()
+    public email: string;
 
     @OneToOne(() => Character, (character) => character.user)
     @JoinColumn({
@@ -30,10 +33,11 @@ export class User {
     })
     public createdAt: Date;
 
-    constructor (name?: string, age?: number, registration?: string) {
+    constructor (name?: string, password?: string, email?: string, birthDate?: Date) {
         if(name) this.name = name;
-        if(age) this.age = age;
-        if(registration) this.registration = registration;
+        if(password) this.password = password;
+        if(email) this.email = email;
+        if(birthDate) this.birthDate = birthDate;
         this.createdAt = new Date();
     }
 }
