@@ -10,6 +10,7 @@ export class ResgisterComponent implements OnInit {
 
   public name: string = ''
   public email: string = '';
+  public password: string = '';
   public birth_date: Date = new Date();
 
   constructor(
@@ -24,7 +25,8 @@ export class ResgisterComponent implements OnInit {
     this.userService.create({
       nome: this.name,
       email: this.email,
-      idade: 22
+      senha: this.password,
+      data_nascimento: new Date().toISOString()
     }).subscribe(() => {
       console.log("User created!");
       

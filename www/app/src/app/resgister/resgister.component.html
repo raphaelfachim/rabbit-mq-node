@@ -1,7 +1,18 @@
-<div class="register-box">
-    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
-        <input type="text" class="form-control" id="name" required [(ngModel)] = "name" name="name">
-        <input type="text" class="form-control" id="email" required [(ngModel)] = "email" name="email">
-        <button type="submit" class="btn btn-primary mb-3">Register</button>
-    </form>
-</div> 
+<div>
+    <div class="register-box">
+        <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+            <label for="name" >Name</label>
+            <input type="text" class="form-control" id="name" required [(ngModel)] = "name" name="name">
+    
+            <label for="email" >Email</label>
+            <input type="text" class="form-control" id="email" required [(ngModel)] = "email" name="email">
+    
+            <label for="password" >Password</label>
+            <input type="password" class="form-control" id="password" required [(ngModel)] = "password" name="password">
+    
+            <div class="register">
+                <button type="submit" class="btn btn-primary mb-3 register">Register</button>
+            </div>
+        </form>
+    </div> 
+</div>

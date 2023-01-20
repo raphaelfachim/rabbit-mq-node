@@ -15,7 +15,10 @@ export class User {
     @Column()
     private password: string;
 
-    @Column()
+    @Column({
+        name: "birth_date",
+        type: "date"
+    })
     public birthDate: Date;
 
     @Column()

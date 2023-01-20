@@ -1,6 +1,8 @@
 export interface User {
     nome: string;
     email: string;
-    idade: number;
-    created_at?: Date;
+    senha: string;
+    data_nascimento: string;
+    idade?: number;
+    data_criacao?: Date;
 }
